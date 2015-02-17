@@ -106,8 +106,13 @@ std::string mem_string( bool use_colors = false )
     oss << mem_lut[( 100 * used_mem ) / total_mem];
   }
 
-  oss << convert_unit( used_mem, MEGABYTES )
-    << '/' << convert_unit( total_mem, MEGABYTES ) << "MB";
+  if (used_mem >= (1024 * 1024 * 1024) && total_mem >= (1024 * 1024 * 1024)) {
+    oss << convert_unit( used_mem, GIGABYTES )
+      << '/' << convert_unit( total_mem, GIGABYTES ) << "GB";
+  } else {
+    oss << convert_unit( used_mem, MEGABYTES )
+      << '/' << convert_unit( total_mem, MEGABYTES ) << "MB";
+  }
 
   if( use_colors )
   {

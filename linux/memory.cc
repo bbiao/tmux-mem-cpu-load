@@ -92,8 +92,13 @@ std::string mem_string( bool use_colors = false )
   // we want megabytes on output, but since the values already come as 
   // kilobytes we need to divide them by 1024 only once, thus we use
   // KILOBYTES
-  oss << convert_unit(used_mem, MEGABYTES, KILOBYTES) << '/' 
-    << convert_unit(total_mem, MEGABYTES, KILOBYTES) << "MB";
+  if (used_mem >= (1024 * 1024) && total_mem >= (1024 * 1024)) {
+    oss << convert_unit(used_mem, GIGABYTES, KILOBYTES) << '/' 
+      << convert_unit(total_mem, GIGABYTES, KILOBYTES) << "GB";
+  } else {
+    oss << convert_unit(used_mem, MEGABYTES, KILOBYTES) << '/' 
+      << convert_unit(total_mem, MEGABYTES, KILOBYTES) << "MB";
+  }
 
   if( use_colors )
   {

@@ -79,7 +79,7 @@ std::string cpu_string( unsigned int cpu_usage_delay, unsigned int graph_lines,
   }
   oss.width( 5 );
   oss << percentage;
-  oss << "%";
+  oss << "% ";
   if( use_colors )
   {
     oss << "#[fg=default,bg=default]";
@@ -174,7 +174,7 @@ int main( int argc, char** argv )
   }
 
   std::cout << mem_string( use_colors )
-    << cpu_string( cpu_usage_delay, graph_lines, use_colors ) << ' '
+    << cpu_string( cpu_usage_delay, graph_lines, use_colors )
     << load_string( use_colors );
 
   return EXIT_SUCCESS;

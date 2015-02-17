@@ -71,8 +71,13 @@ std::string mem_string( bool use_colors = false )
     oss << mem_lut[ ( 100 * used ) / ( page_count * page_size ) ];
   }
 
-  oss << convert_unit( used, MEGABYTES ) << '/'
-    << convert_unit( page_count * page_size, MEGABYTES ) << "MB";
+  if (used >= (1024 * 1024 * 1024) && page_count * page_size >= (1024 * 1024 * 1024)) {
+    oss << convert_unit( used, GIGABYTES ) << '/'
+      << convert_unit( page_count * page_size, GIGABYTES ) << "GB";
+  } else {
+    oss << convert_unit( used, MEGABYTES ) << '/'
+      << convert_unit( page_count * page_size, MEGABYTES ) << "MB";
+  }
 
   if( use_colors )
   {
